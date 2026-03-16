@@ -24,6 +24,7 @@
 <script type="module">
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const params = new URLSearchParams(location.search);
@@ -50,11 +51,12 @@ const MODEL_CONFIG = {
   },
   miles: {
     url: '/projects/character/miles/miles_character.glb',
+    textureUrl: '/projects/character/miles/texture.png',
     bg: 'radial-gradient(ellipse at 50% 50%, #1a0010 0%, #0d0008 50%, #050002 100%)',
-    camPos: [0, 0.5, 4],
-    target: [0, 0.3, 0],
+    camPos: [0, 0.8, 3.5],
+    target: [0, 0.8, 0],
     rimColor: '#FF2244',
-    rimIntensity: 1.5,
+    rimIntensity: 2.0,
     fillColor: '#440011',
   },
 };
@@ -106,7 +108,11 @@ controls.enablePan = false;
 controls.update();
 
 // Load model
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.7/');
+
 const loader = new GLTFLoader();
+loader.setDRACOLoader(dracoLoader);
 loader.load(config.url, (gltf) => {
   const obj = gltf.scene;
 
@@ -128,13 +134,27 @@ loader.load(config.url, (gltf) => {
     if (node.isMesh) {
       node.castShadow = true;
       node.receiveShadow = true;
+      
+      if (config.textureUrl) {
+        const texLoader = new THREE.TextureLoader();
+        const tex = texLoader.load(config.textureUrl, () => {
+          node.material.map = tex;
+          node.material.needsUpdate = true;
+        });
+        tex.flipY = false;
+        tex.colorSpace = THREE.SRGBColorSpace;
+      }
     }
   });
 
   scene.add(obj);
-  window.__MODEL_READY__ = true;
-  document.title = 'READY:' + model;
-  console.log('MODEL_READY');
+  
+  // Wait a bit extra for texture to apply before signaling ready
+  setTimeout(() => {
+    window.__MODEL_READY__ = true;
+    document.title = 'READY:' + model;
+    console.log('MODEL_READY');
+  }, 1000);
 }, undefined, (err) => {
   console.error('Load error:', err);
   window.__MODEL_READY__ = true;

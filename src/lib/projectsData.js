@@ -11,9 +11,9 @@ export const projectsData = {
         tag: "Blender · Animation",
         description: "3D characters, cinematic animations and product visualizations created using Blender.",
         previewImages: [
+            "/projects/character/miles/miles_thumb.png",
             "/projects/character/astranaut/astranaut_thumb.png",
             "/projects/animation/client_home/client_home_thumb.png",
-            "/projects/product/airpods/airpods_thumb.png",
         ],
         subcategories: [
             {
@@ -47,7 +47,7 @@ export const projectsData = {
                         title: "Miles Morales",
                         subtitle: "Stylized 3D · Blender",
                         description: "A 3D character model inspired by Miles Morales Spider-Man.",
-                        src: "/projects/character/miles/thumb.png",
+                        src: "/projects/character/miles/miles_thumb.png",
                         modelUrl: "/projects/character/miles/miles_character.glb",
                         textureUrl: "/projects/character/miles/texture.png",
                         tools: ["Blender"],
