@@ -60,6 +60,7 @@ desktop.ini
 
 # --- PROJECT SPECIFIC & TEMP ---
 /tmp/
+scripts/
 .temp/
 .cache/
 .gemini/
