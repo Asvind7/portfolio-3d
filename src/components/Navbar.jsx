@@ -103,7 +103,7 @@ const Navbar = () => {
                         <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
                         </svg>
-                        Download PDF
+                        Download Resume
                     </a>
                 </div>
             </nav>
@@ -159,7 +159,7 @@ const Navbar = () => {
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
                             </svg>
                         </div>
-                        <span className="text-[9px] font-black uppercase tracking-[0.15em]">PDF</span>
+                        <span className="text-[9px] font-black uppercase tracking-[0.15em]">RESUME</span>
                     </a>
                 </div>
             </nav>
