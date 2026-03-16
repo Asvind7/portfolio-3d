@@ -1,59 +1,56 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useProgress } from "@react-three/drei";
 
 const LoadingScreen = ({ onComplete }) => {
-    const [progress, setProgress] = useState(0);
+    // Drei's progress hook tracks the DefaultLoadingManager (all GLTF, Texture, etc. loads)
+    const { progress: actualProgress, active } = useProgress();
+    const [displayProgress, setDisplayProgress] = useState(0);
     const [phase, setPhase] = useState("loading"); // "loading" | "done" | "hidden"
     const rafId = useRef(null);
-    const progressRef = useRef(0);
-
+    const startTime = useRef(performance.now());
+    
+    // Minimum time to show the loading screen for aesthetic brand consistency
+    const MIN_TIME = 2500; 
+    
     useEffect(() => {
-        // Use requestAnimationFrame instead of setInterval for smoother and more
-        // RAM-friendly animation. Only commit to React state every ~2 frames to
-        // halve the number of React re-renders on the loading screen.
-        const TARGET_DURATION = 2000; // 2 seconds total
-        const startTime = performance.now();
-        let lastCommittedProgress = 0;
+        const tick = () => {
+            const elapsed = performance.now() - startTime.current;
+            const timeWeight = Math.min(elapsed / MIN_TIME, 1);
+            
+            // Actual asset progress scaled to 0-1
+            const assetWeight = actualProgress / 100;
+            
+            // Display progress is the MINIMUM of time weight and asset weight
+            // This ensures we wait for BOTH assets AND the animation time
+            const targetWeight = active ? Math.min(timeWeight, assetWeight) : timeWeight;
+            const newPct = Math.floor(targetWeight * 100);
 
-        const tick = (now) => {
-            const elapsed = now - startTime;
-            const raw = Math.min(elapsed / TARGET_DURATION, 1);
+            setDisplayProgress(prev => {
+                if (newPct > prev) return newPct;
+                return prev;
+            });
 
-            // Ease-out curve: faster at start, slower near end
-            const eased = 1 - Math.pow(1 - raw, 2.5);
-            const newPct = Math.floor(eased * 100);
-
-            progressRef.current = newPct;
-
-            // Only trigger a React state update if progress moved by ≥2
-            // — halves render count without visible difference
-            if (newPct - lastCommittedProgress >= 2) {
-                setProgress(newPct);
-                lastCommittedProgress = newPct;
-            }
-
-            if (raw < 1) {
+            if (newPct < 100 || active || elapsed < MIN_TIME) {
                 rafId.current = requestAnimationFrame(tick);
             } else {
-                setProgress(100);
-                // Brief pause at 100% before fading out
+                setDisplayProgress(100);
                 setTimeout(() => {
                     setPhase("done");
                     setTimeout(() => {
                         setPhase("hidden");
                         onComplete?.();
-                    }, 600);
-                }, 300);
+                    }, 800);
+                }, 400);
             }
         };
 
         rafId.current = requestAnimationFrame(tick);
-
         return () => {
             if (rafId.current) cancelAnimationFrame(rafId.current);
         };
-    }, []);
+    }, [actualProgress, active, onComplete]);
 
     if (phase === "hidden") return null;
 
@@ -102,7 +99,7 @@ const LoadingScreen = ({ onComplete }) => {
                         <div
                             className="h-full rounded-full"
                             style={{
-                                width: `${progress}%`,
+                                width: `${displayProgress}%`,
                                 background: "linear-gradient(90deg, #10b981, #34d399)",
                                 boxShadow: "0 0 10px rgba(16, 185, 129, 0.5)",
                                 transition: "width 0.05s linear",
@@ -111,7 +108,7 @@ const LoadingScreen = ({ onComplete }) => {
                     </div>
                     <div className="flex justify-between text-slate-500 text-xs font-mono font-bold">
                         <span>Initializing...</span>
-                        <span>{progress}%</span>
+                        <span>{displayProgress}%</span>
                     </div>
                 </div>
             </div>
