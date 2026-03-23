@@ -3,7 +3,7 @@
 
 📍 Keralam, India  
 ✉️ [asvindvincent07@gmail.com](mailto:asvindvincent07@gmail.com)  
-🔗 [LinkedIn](https://in.linkedin.com/in/asvind-v-a-130076377) | [Behance Portfolio](https://www.behance.net/asvindvincent1) | [Instagram](https://www.instagram.com/asvind_studio.3d/)
+🔗 [Live Portfolio](http://asvind-portfolio-3d-sand.vercel.app/) | [LinkedIn](https://in.linkedin.com/in/asvind-v-a-130076377) | [Behance Portfolio](https://www.behance.net/asvindvincent1) | [Instagram](https://www.instagram.com/asvind_studio.3d/)
 
 ---
 
@@ -43,6 +43,12 @@ Creative digital artist dedicated to crafting immersive visual experiences. Spec
 ### **Cinematic Title Sequences** | *After Effects*
 *   Developed a series of high-impact title sequences leveraging 3D typography, volumetric lighting, and atmospheric depth effects.
 *   Designed with a focus on scale and rhythm to build anticipation for film and brand identities.
+
+---
+
+## EDUCATION
+*   **B.Tech in Information Technology** | *Pursuing*
+*   **Higher Secondary Certificate (HSC)** | *Completed*
 
 ---
 
