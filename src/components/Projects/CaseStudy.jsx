@@ -269,18 +269,14 @@ const BlenderUI = ({ project, customOnBack, onBackToHome, onNext, onPrev, subcat
     );
 };
 
+
+
 const VideoEditorUI = ({ project, customOnBack, onBackToHome, onNext, onPrev, subcategoryName, navState, toggleFullscreen, isFullscreen }) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const videoRef = useRef(null);
-    const [progress, setProgress] = useState(0);
     const tier = "low"; // Changed from 'high' to 'low' to improve video playback performance
     // Only render the blurred ambient video on high-end devices — it's a 2nd full video decode stream
     const showAmbientBg = tier === "high";
-
-    const getVideoSrc = (url) => {
-        if (!url) return null;
-        return url;
-    };
 
     const togglePlay = () => {
         if (!videoRef.current) return;
@@ -366,15 +362,15 @@ const VideoEditorUI = ({ project, customOnBack, onBackToHome, onNext, onPrev, su
                                         <video
                                             key={project.videoUrl}
                                             ref={videoRef}
-                                            src={getVideoSrc(project.videoUrl)}
-                                            autoPlay
-                                            loop
+                                            preload="none"
                                             playsInline
+                                            poster={project.videoUrl ? project.videoUrl.replace('.mp4', '.jpg') : undefined}
                                             className="h-full w-auto max-w-full object-contain z-10 relative"
-                                            onTimeUpdate={(e) => setProgress(e.target.currentTime / e.target.duration)}
                                             onPlay={() => setIsPlaying(true)}
                                             onPause={() => setIsPlaying(false)}
-                                        />
+                                        >
+                                            <source src={project.videoUrl} />
+                                        </video>
 
                                     </div>
                                 ) : (
@@ -384,15 +380,15 @@ const VideoEditorUI = ({ project, customOnBack, onBackToHome, onNext, onPrev, su
                                             <video
                                                 key={project.videoUrl}
                                                 ref={videoRef}
-                                                src={getVideoSrc(project.videoUrl)}
-                                                autoPlay
-                                                loop
+                                                preload="none"
                                                 playsInline
+                                                poster={project.videoUrl ? project.videoUrl.replace('.mp4', '.jpg') : undefined}
                                                 className="max-h-full max-w-full object-contain z-10"
-                                                onTimeUpdate={(e) => setProgress(e.target.currentTime / e.target.duration)}
                                                 onPlay={() => setIsPlaying(true)}
                                                 onPause={() => setIsPlaying(false)}
-                                            />
+                                            >
+                                                <source src={project.videoUrl} />
+                                            </video>
 
                                         </div>
                                     </div>
@@ -422,9 +418,6 @@ const VideoEditorUI = ({ project, customOnBack, onBackToHome, onNext, onPrev, su
 
                 {/* Timeline Area & Description */}
                 <div className="h-[28svh] md:h-[250px] bg-[#0a0a0a] flex flex-col min-h-0 overflow-hidden shrink-0 relative">
-                    <div className="h-8 bg-[#101010] border-b border-[#111] flex items-center justify-center shrink-0">
-                        <span className="text-white font-mono text-[10px] tracking-widest px-2 py-0.5 rounded border border-white/10 bg-black shadow-lg">00:00:{(progress * 15).toFixed(2).replace('.', ':')}</span>
-                    </div>
 
                     {/* Tracks - Fixed (Static) */}
                     <div className="flex shrink-0">
@@ -444,11 +437,6 @@ const VideoEditorUI = ({ project, customOnBack, onBackToHome, onNext, onPrev, su
                         {/* Track Timeline Area */}
                         <div className="flex-1 relative bg-black/40 overflow-hidden h-[82px] shrink-0">
                             <div className="p-1 flex flex-col gap-1 relative h-full">
-                                {/* Playhead Line - Constrained to Track Area */}
-                                <div className="absolute top-0 bottom-0 w-[1.5px] bg-[#10b981] z-20 pointer-events-none" style={{ left: `${progress * 100}%` }}>
-                                    <div className="absolute -top-0.5 -left-1.5 w-3 h-3 bg-[#10b981] rounded-full shadow-[0_0_15px_#10b981]" />
-                                </div>
-
                                 <div className="h-10 relative overflow-hidden">
                                     <div className="absolute left-0 right-[20%] top-1 bottom-1 bg-[#10b981]/20 border border-[#10b981]/40 rounded-md flex items-center px-3 shadow-[inset_0_0_100px_rgba(16,185,129,0.1)]">
                                         <span className="text-[9px] md:text-[10px] font-black text-[#10b981]/80 uppercase truncate">{project?.title}</span>
