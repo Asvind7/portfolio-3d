@@ -17,35 +17,19 @@
 }
 
 :root {
-  --background: #fdfdfd;
-  --foreground: #0f172a;
+  --background: #020617;
+  /* Deepest blue-black */
+  --foreground: #f8fafc;
   --accent: #10b981;
-  --accent-secondary: #059669;
-  --accent-glow: rgba(16, 185, 129, 0.1);
-  --nav-bg: rgba(255, 255, 255, 0.8);
-  --nav-border: rgba(0, 0, 0, 0.05);
-  --card-bg: rgba(255, 255, 255, 0.6);
-  --card-border: rgba(0, 0, 0, 0.08);
-  --glass-bg: rgba(255, 255, 255, 0.3);
-  --muted-text: #64748b;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #020617;
-    /* Deepest blue-black */
-    --foreground: #f8fafc;
-    --accent: #10b981;
-    --accent-secondary: #34d399;
-    --accent-glow: rgba(16, 185, 129, 0.15);
-    --nav-bg: rgba(2, 6, 23, 0.8);
-    --nav-border: rgba(255, 255, 255, 0.1);
-    --card-bg: rgba(15, 23, 42, 0.4);
-    /* Neutered dark slate */
-    --card-border: rgba(255, 255, 255, 0.06);
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --muted-text: #94a3b8;
-  }
+  --accent-secondary: #34d399;
+  --accent-glow: rgba(16, 185, 129, 0.15);
+  --nav-bg: rgba(2, 6, 23, 0.8);
+  --nav-border: rgba(255, 255, 255, 0.1);
+  --card-bg: rgba(15, 23, 42, 0.4);
+  /* Neutered dark slate */
+  --card-border: rgba(255, 255, 255, 0.06);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --muted-text: #94a3b8;
 }
 
 /* Base Resets */

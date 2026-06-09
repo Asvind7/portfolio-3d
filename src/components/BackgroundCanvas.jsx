@@ -6,7 +6,6 @@ import React, { useRef, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Instances, Instance } from "@react-three/drei";
 import * as THREE from "three";
-import { useTheme } from "next-themes";
 const ACCENT_COLOR = "#10b981";
 
 // Throttled mouse state — only update every 32ms to reduce React renders
@@ -128,7 +127,6 @@ const StaticBackground = ({ isDark }) => (
 );
 
 const BackgroundCanvas = () => {
-    const { resolvedTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
     const tier = "high"; // Reverted optimization: hardcoded to high
 
@@ -136,7 +134,7 @@ const BackgroundCanvas = () => {
 
     if (!mounted) return <div className="fixed inset-0 -z-30 bg-[#030816]" />;
 
-    const isDark = resolvedTheme === "dark";
+    const isDark = true;
 
     // On low-end devices skip WebGL background entirely — saves ~80MB RAM
     if (tier === "low") {
