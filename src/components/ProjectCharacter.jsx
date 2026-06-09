@@ -1,4 +1,6 @@
 "use client";
+import "@/lib/suppressThreeWarnings";
+import { handleContextLoss } from "@/lib/suppressThreeWarnings";
 
 import React, { Suspense, useRef, useState, useEffect, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
@@ -191,7 +193,7 @@ const ProjectCharacter = ({ activeCategory }) => {
             onMouseLeave={() => !isMobile && setIsHovered(false)}
             onPointerDown={handleInteraction}
         >
-            <Canvas camera={{ fov: 25, position: [15, 12, 15], near: 0.1, far: 1000 }} gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }} dpr={[1, 2]} onCreated={({ camera }) => camera.lookAt(0, 0, 0)}>
+            <Canvas camera={{ fov: 25, position: [15, 12, 15], near: 0.1, far: 1000 }} gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }} dpr={[1, 2]} onCreated={(state) => { state.camera.lookAt(0, 0, 0); handleContextLoss(state); }}>
                 <Suspense fallback={null}>
                     <ambientLight intensity={0.8} />
                     <directionalLight position={[5, 10, 5]} intensity={1.5} color="#ffffff" />

@@ -1,4 +1,6 @@
 "use client";
+import "@/lib/suppressThreeWarnings";
+import { handleContextLoss } from "@/lib/suppressThreeWarnings";
 
 import React, { Suspense, useRef, useState, useEffect, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
@@ -203,8 +205,9 @@ const HomeCharacter = () => {
                     powerPreference: "default", // removed mediump as it severely degrades material quality on phones
                 }}
                 dpr={dpr}
-                onCreated={({ camera: cam }) => {
-                    cam.lookAt(...camera.lookAt);
+                onCreated={(state) => {
+                    state.camera.lookAt(...camera.lookAt);
+                    handleContextLoss(state);
                 }}
             >
                 <Suspense fallback={null}>

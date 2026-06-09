@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import BackgroundCanvas from "@/components/BackgroundCanvas";
 import CustomCursor from "@/components/CustomCursor";
 import ClientProviders from "@/components/ClientProviders";
+import SuppressWarnings from "@/components/SuppressWarnings";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-accent selection:text-background pb-20 md:pb-0`}
       >
+        <SuppressWarnings />
         <BackgroundCanvas />
         <CustomCursor />
         <ClientProviders>

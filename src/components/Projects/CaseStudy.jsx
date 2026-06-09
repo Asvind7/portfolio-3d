@@ -279,14 +279,39 @@ const VideoEditorUI = ({ project, customOnBack, onBackToHome, onNext, onPrev, su
 
     const getVideoSrc = (url) => {
         if (!url) return null;
-        if (url.startsWith('http')) return url;
-        return `http://localhost:8000/api/video?path=${encodeURIComponent(url)}`;
+        return url;
     };
 
     const togglePlay = () => {
         if (!videoRef.current) return;
-        if (videoRef.current.paused || !isPlaying) { videoRef.current.play(); setIsPlaying(true); }
-        else { videoRef.current.pause(); setIsPlaying(false); }
+        if (videoRef.current.paused || !isPlaying) {
+            const playPromise = videoRef.current.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {});
+            }
+            setIsPlaying(true);
+        }
+        else {
+            videoRef.current.pause();
+            setIsPlaying(false);
+        }
+    };
+
+    const pauseAndLog = (reason) => {
+        if (videoRef.current && !videoRef.current.paused) {
+            videoRef.current.pause();
+            setIsPlaying(false);
+        }
+    };
+
+    const handleNext = () => {
+        pauseAndLog('navigated to next video');
+        onNext();
+    };
+
+    const handlePrev = () => {
+        pauseAndLog('navigated to previous video');
+        onPrev();
     };
 
     return (
@@ -339,6 +364,7 @@ const VideoEditorUI = ({ project, customOnBack, onBackToHome, onNext, onPrev, su
                                     /* ── Vertical Video Layout: fills height, centered ── */
                                     <div className="flex-1 flex items-center justify-center bg-black relative overflow-hidden">
                                         <video
+                                            key={project.videoUrl}
                                             ref={videoRef}
                                             src={getVideoSrc(project.videoUrl)}
                                             autoPlay
@@ -356,6 +382,7 @@ const VideoEditorUI = ({ project, customOnBack, onBackToHome, onNext, onPrev, su
                                     <div className="relative w-full h-full flex items-center justify-center">
                                         <div className="relative h-full w-full flex items-center justify-center overflow-hidden bg-black">
                                             <video
+                                                key={project.videoUrl}
                                                 ref={videoRef}
                                                 src={getVideoSrc(project.videoUrl)}
                                                 autoPlay
@@ -374,21 +401,21 @@ const VideoEditorUI = ({ project, customOnBack, onBackToHome, onNext, onPrev, su
                                 <div className="text-[#10b981] border-2 border-[#10b981] px-4 py-2 font-mono text-sm tracking-tighter">MEDIA OFFLINE</div>
                             )}
 
-                            <button onClick={onPrev} className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 bg-black/60 hover:bg-[#10b981] text-white rounded-full z-20 transition-all border border-white/10 opacity-0 group-hover:opacity-100 hover:scale-110"><ChevronLeft size={28} /></button>
-                            <button onClick={onNext} className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 bg-black/60 hover:bg-[#10b981] text-white rounded-full z-20 transition-all border border-white/10 opacity-0 group-hover:opacity-100 hover:scale-110"><ChevronRight size={28} /></button>
+                            <button onClick={handlePrev} className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 bg-black/60 hover:bg-[#10b981] text-white rounded-full z-20 transition-all border border-white/10 opacity-0 group-hover:opacity-100 hover:scale-110"><ChevronLeft size={28} /></button>
+                            <button onClick={handleNext} className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 bg-black/60 hover:bg-[#10b981] text-white rounded-full z-20 transition-all border border-white/10 opacity-0 group-hover:opacity-100 hover:scale-110"><ChevronRight size={28} /></button>
                         </div>
 
                         {/* Playback Controls Bar */}
                         <div className="h-12 bg-[#101010] flex items-center justify-between px-6 shrink-0 border-t border-b border-white/5">
-                            <button onClick={onPrev} className="text-white/30 hover:text-white transition-colors"><SkipBack size={18} /></button>
+                            <button onClick={handlePrev} className="text-white/30 hover:text-white transition-colors"><SkipBack size={18} /></button>
                             <div className="flex items-center gap-10">
-                                <button onClick={onPrev} className="text-white/40 hover:text-white"><ChevronsLeft size={24} /></button>
+                                <button onClick={handlePrev} className="text-white/40 hover:text-white"><ChevronsLeft size={24} /></button>
                                 <button onClick={togglePlay} className="text-[#10b981] scale-110 transition-transform active:scale-90 shadow-[0_0_20px_rgba(16,185,129,0.2)]">
                                     {isPlaying ? <Pause size={30} fill="currentColor" /> : <Play size={30} fill="currentColor" className="ml-1" />}
                                 </button>
-                                <button onClick={onNext} className="text-white/40 hover:text-white"><ChevronsRight size={24} /></button>
+                                <button onClick={handleNext} className="text-white/40 hover:text-white"><ChevronsRight size={24} /></button>
                             </div>
-                            <button onClick={onNext} className="text-white/30 hover:text-white transition-colors"><SkipForward size={18} /></button>
+                            <button onClick={handleNext} className="text-white/30 hover:text-white transition-colors"><SkipForward size={18} /></button>
                         </div>
                     </div>
                 </div>

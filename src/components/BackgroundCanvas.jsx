@@ -1,4 +1,6 @@
 "use client";
+import "@/lib/suppressThreeWarnings";
+import { handleContextLoss } from "@/lib/suppressThreeWarnings";
 
 import React, { useRef, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
@@ -165,6 +167,7 @@ const BackgroundCanvas = () => {
                 gl={glSettings}
                 dpr={Math.min(window.devicePixelRatio, tier === "mid" ? 1.0 : 1.5)}
                 frameloop="always"
+                onCreated={(state) => handleContextLoss(state)}
             >
                 <fog attach="fog" args={[isDark ? "#030816" : "#ffffff", 25, 50]} />
                 <ambientLight intensity={isDark ? 1.0 : 2.0} />

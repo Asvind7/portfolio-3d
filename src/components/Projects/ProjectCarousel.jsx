@@ -43,7 +43,7 @@ export const ProjectCarousel = ({ subcategory, categoryLabel, onViewCaseStudy, o
                 <div className="flex" style={{ transform: `translateX(-${current * 100}%)`, transition: animating ? "transform 0.45s cubic-bezier(0.4,0,0.2,1)" : "none" }}>
                     {projects.map((project, i) => (
                         <div key={project.id} className="relative w-full flex-shrink-0" style={{ aspectRatio: "16/9" }}>
-                            <Image src={project.src} alt={project.title} fill className="object-cover" />
+                            <Image src={project.src} alt={project.title} fill sizes="(max-width: 768px) 100vw, 80vw" className="object-cover" />
                             <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 40%, rgba(3,7,18,0.95) 100%)" }} />
                             {/* Slide info */}
                             <div className="absolute bottom-0 left-0 right-0 p-6 flex flex-col gap-2">
@@ -116,7 +116,7 @@ export const ProjectCarousel = ({ subcategory, categoryLabel, onViewCaseStudy, o
                         className="relative flex-shrink-0 rounded-xl overflow-hidden border-2 transition-all duration-300 shadow-sm"
                         style={{ width: 120, height: 72, borderColor: i === current ? "var(--accent)" : "var(--card-border)", opacity: i === current ? 1 : 0.55 }}
                     >
-                        <Image src={p.src} alt={p.title} fill className="object-cover" />
+                        <Image src={p.src} alt={p.title} fill sizes="120px" className="object-cover" />
                         <div className="absolute inset-0 flex items-end p-2 bg-gradient-to-t from-black/60 to-transparent">
                             <span className="text-[10px] text-white font-bold truncate tracking-wide">{p.title}</span>
                         </div>
