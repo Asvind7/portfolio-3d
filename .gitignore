@@ -73,3 +73,8 @@ captures/
 /cypress/videos/
 /cypress/screenshots/
 .nyc_output/
+
+# --- PYTHON ---
+venv/
+__pycache__/
+*.pyc

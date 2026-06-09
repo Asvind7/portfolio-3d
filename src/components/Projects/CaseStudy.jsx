@@ -273,9 +273,15 @@ const VideoEditorUI = ({ project, customOnBack, onBackToHome, onNext, onPrev, su
     const [isPlaying, setIsPlaying] = useState(false);
     const videoRef = useRef(null);
     const [progress, setProgress] = useState(0);
-    const tier = "high";
+    const tier = "low"; // Changed from 'high' to 'low' to improve video playback performance
     // Only render the blurred ambient video on high-end devices — it's a 2nd full video decode stream
     const showAmbientBg = tier === "high";
+
+    const getVideoSrc = (url) => {
+        if (!url) return null;
+        if (url.startsWith('http')) return url;
+        return `http://localhost:8000/api/video?path=${encodeURIComponent(url)}`;
+    };
 
     const togglePlay = () => {
         if (!videoRef.current) return;
@@ -334,7 +340,7 @@ const VideoEditorUI = ({ project, customOnBack, onBackToHome, onNext, onPrev, su
                                     <div className="flex-1 flex items-center justify-center bg-black relative overflow-hidden">
                                         <video
                                             ref={videoRef}
-                                            src={project.videoUrl}
+                                            src={getVideoSrc(project.videoUrl)}
                                             autoPlay
                                             loop
                                             playsInline
@@ -343,14 +349,7 @@ const VideoEditorUI = ({ project, customOnBack, onBackToHome, onNext, onPrev, su
                                             onPlay={() => setIsPlaying(true)}
                                             onPause={() => setIsPlaying(false)}
                                         />
-                                        {/* Soft ambient blur — only on high-tier devices */}
-                                        {showAmbientBg && (
-                                            <video
-                                                src={project.videoUrl}
-                                                muted loop playsInline
-                                                className="absolute inset-0 w-full h-full object-cover blur-3xl opacity-10 scale-110 pointer-events-none"
-                                            />
-                                        )}
+
                                     </div>
                                 ) : (
                                     /* ── Standard / Landscape Video Layout ── */
@@ -358,7 +357,7 @@ const VideoEditorUI = ({ project, customOnBack, onBackToHome, onNext, onPrev, su
                                         <div className="relative h-full w-full flex items-center justify-center overflow-hidden bg-black">
                                             <video
                                                 ref={videoRef}
-                                                src={project.videoUrl}
+                                                src={getVideoSrc(project.videoUrl)}
                                                 autoPlay
                                                 loop
                                                 playsInline
@@ -367,14 +366,7 @@ const VideoEditorUI = ({ project, customOnBack, onBackToHome, onNext, onPrev, su
                                                 onPlay={() => setIsPlaying(true)}
                                                 onPause={() => setIsPlaying(false)}
                                             />
-                                            {/* Ambient blur bg — only on high-tier devices */}
-                                            {showAmbientBg && (
-                                                <video
-                                                    src={project.videoUrl}
-                                                    muted loop playsInline
-                                                    className="absolute inset-0 w-full h-full object-cover blur-3xl opacity-10 scale-110 pointer-events-none"
-                                                />
-                                            )}
+
                                         </div>
                                     </div>
                                 )
