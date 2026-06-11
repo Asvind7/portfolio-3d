@@ -21,9 +21,26 @@ export const metadata = {
   description: "Futuristic portfolio website of Asvind V.A, Frontend Developer and 3D Artist",
 };
 
+import Script from "next/script";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <Script 
+          src="https://www.googletagmanager.com/gtag/js?id=G-TZYH5NVRQW" 
+          strategy="afterInteractive" 
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            gtag('js', new Date());
+          
+            gtag('config', 'G-TZYH5NVRQW');
+          `}
+        </Script>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-accent selection:text-background pb-20 md:pb-0`}
       >
