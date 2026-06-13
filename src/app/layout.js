@@ -27,7 +27,6 @@ import ClientBackgroundCanvas from "@/components/ClientBackgroundCanvas";
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <head>
         <Script 
           src="https://www.googletagmanager.com/gtag/js?id=G-TZYH5NVRQW" 
           strategy="lazyOnload" 
@@ -41,7 +40,6 @@ export default function RootLayout({ children }) {
             gtag('config', 'G-TZYH5NVRQW');
           `}
         </Script>
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-accent selection:text-background pb-20 md:pb-0`}
       >
