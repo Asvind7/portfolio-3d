@@ -239,9 +239,5 @@ const HomeCharacter = () => {
 
 // Pre-load the models
 useGLTF.preload("/models/hero character.glb");
-useGLTF.preload("/models/scene.glb");
-useGLTF.preload("/projects/character/astranaut/astranaut.glb");
-useGLTF.preload("/projects/character/asvind/asvind.glb");
-useGLTF.preload("/projects/character/miles/miles_character.glb");
 
 export default HomeCharacter;

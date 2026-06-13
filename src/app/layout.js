@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import BackgroundCanvas from "@/components/BackgroundCanvas";
+// BackgroundCanvas is dynamically imported below to prevent Three.js from blocking the main thread
 import CustomCursor from "@/components/CustomCursor";
 import ClientProviders from "@/components/ClientProviders";
 import SuppressWarnings from "@/components/SuppressWarnings";
@@ -22,6 +22,7 @@ export const metadata = {
 };
 
 import Script from "next/script";
+import ClientBackgroundCanvas from "@/components/ClientBackgroundCanvas";
 
 export default function RootLayout({ children }) {
   return (
@@ -29,9 +30,9 @@ export default function RootLayout({ children }) {
       <head>
         <Script 
           src="https://www.googletagmanager.com/gtag/js?id=G-TZYH5NVRQW" 
-          strategy="afterInteractive" 
+          strategy="lazyOnload" 
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){window.dataLayer.push(arguments);}
@@ -45,7 +46,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-accent selection:text-background pb-20 md:pb-0`}
       >
         <SuppressWarnings />
-        <BackgroundCanvas />
+        <ClientBackgroundCanvas />
         <CustomCursor />
         <ClientProviders>
           <Navbar />
