@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { projectsData } from "@/lib/projectsData";
 import { GreenLabel } from "./Projects/Shared";
 import { CategoryCard } from "./Projects/CategorySelection";
@@ -19,6 +20,34 @@ const Projects = () => {
     const [selProject, setSelProject] = useState(null);
     const [isExitingCaseStudy, setIsExitingCaseStudy] = useState(false);
     const [hoveredCategory, setHoveredCategory] = useState(null);
+
+    const searchParams = useSearchParams();
+    const projectId = searchParams.get("project");
+
+    useEffect(() => {
+        if (!projectId) return;
+
+        // Find the project and its category/subcategory
+        for (const catKey in projectsData) {
+            const cat = projectsData[catKey];
+            for (const sub of cat.subcategories) {
+                const proj = sub.projects.find((p) => p.id === projectId);
+                if (proj) {
+                    setSelCategory(cat);
+                    setSelSub(sub);
+                    setSelProject(proj);
+                    setLevel(4);
+                    
+                    // Small delay to ensure DOM is ready before scrolling
+                    setTimeout(() => {
+                        const el = document.getElementById("projects");
+                        if (el) el.scrollIntoView({ behavior: "auto" });
+                    }, 100);
+                    return;
+                }
+            }
+        }
+    }, [projectId]);
 
     const headingRef = useRef(null);
     const [headingVisible, setHeadingVisible] = useState(false);
@@ -208,4 +237,10 @@ const Projects = () => {
     );
 };
 
-export default Projects;
+export default function ProjectsWithSuspense() {
+    return (
+        <Suspense fallback={<div className="h-screen w-full flex items-center justify-center">Loading Projects...</div>}>
+            <Projects />
+        </Suspense>
+    );
+}

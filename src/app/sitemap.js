@@ -1,19 +1,32 @@
+import { projectsData } from "@/lib/projectsData";
+
 export default function sitemap() {
   const baseUrl = 'https://asvind-portfolio-3d-sand.vercel.app';
 
-  return [
+  // Base URLs
+  const routes = [
     {
       url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'yearly',
+      changeFrequency: 'weekly',
       priority: 1,
     },
-    // If you want the model-capture page to be found by Google, uncomment this block:
-    // {
-    //   url: `${baseUrl}/model-capture`,
-    //   lastModified: new Date(),
-    //   changeFrequency: 'monthly',
-    //   priority: 0.8,
-    // },
   ];
+
+  // Dynamically add all projects
+  for (const catKey in projectsData) {
+    const cat = projectsData[catKey];
+    for (const sub of cat.subcategories) {
+      for (const proj of sub.projects) {
+        routes.push({
+          url: `${baseUrl}/?project=${proj.id}`,
+          lastModified: new Date(),
+          changeFrequency: 'monthly',
+          priority: 0.8,
+        });
+      }
+    }
+  }
+
+  return routes;
 }

@@ -17,8 +17,34 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://asvind-portfolio-3d-sand.vercel.app"),
   title: "Asvind V.A | Futuristic Portfolio",
   description: "Futuristic portfolio website of Asvind V.A, Frontend Developer and 3D Artist",
+  keywords: ["Asvind V.A", "Frontend Developer", "3D Artist", "Blender", "React Three Fiber", "Motion Graphics"],
+  authors: [{ name: "Asvind V.A" }],
+  creator: "Asvind V.A",
+  openGraph: {
+    title: "Asvind V.A | Futuristic Portfolio",
+    description: "Futuristic portfolio website of Asvind V.A, Frontend Developer and 3D Artist",
+    url: "https://asvind-portfolio-3d-sand.vercel.app",
+    siteName: "Asvind V.A Portfolio",
+    images: [
+      {
+        url: "/projects/character/miles/miles_thumb.png",
+        width: 800,
+        height: 600,
+        alt: "Asvind V.A Portfolio Cover",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Asvind V.A | Futuristic Portfolio",
+    description: "Futuristic portfolio website of Asvind V.A, Frontend Developer and 3D Artist",
+    images: ["/projects/character/miles/miles_thumb.png"],
+  },
 };
 
 import Script from "next/script";
