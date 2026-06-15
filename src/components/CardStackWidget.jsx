@@ -85,7 +85,7 @@ export default function CardStackWidget() {
                         }}
                     >
                         <h4 className="text-white font-black text-[11px] uppercase tracking-wider mb-1 drop-shadow-md">{card.title}</h4>
-                        <p className="text-white/90 text-[9px] leading-relaxed font-medium drop-shadow-sm line-clamp-4">
+                        <p className="text-white/90 text-[9px] leading-relaxed font-medium drop-shadow-sm">
                             {card.content}
                         </p>
                     </div>
