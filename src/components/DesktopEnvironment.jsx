@@ -234,17 +234,17 @@ const DesktopEnvironment = () => {
                             </div>
                             <div className="flex justify-between items-center text-[10px] text-white/80 bg-white/5 p-2 rounded-lg border border-white/5">
                                 <span className="flex items-center gap-2 font-medium">
-                                    <span className="w-3 text-center">🤝</span>
-                                    Freelance
-                                </span>
-                                <span className="font-bold text-emerald-400">3+ Real Clients</span>
-                            </div>
-                            <div className="flex justify-between items-center text-[10px] text-white/80 bg-white/5 p-2 rounded-lg border border-white/5">
-                                <span className="flex items-center gap-2 font-medium">
                                     <img src="/icons/premiere-pro.png" className="w-3 h-3 object-contain" alt="Premiere Pro" />
                                     Premiere Pro
                                 </span>
                                 <span className="font-bold text-emerald-400">20+ Videos Edited</span>
+                            </div>
+                            <div className="flex justify-between items-center text-[10px] text-white/80 bg-white/5 p-2 rounded-lg border border-white/5">
+                                <span className="flex items-center gap-2 font-medium">
+                                    <span className="w-3 text-center">🤝</span>
+                                    Freelance
+                                </span>
+                                <span className="font-bold text-emerald-400">3+ Real Clients</span>
                             </div>
                         </div>
                     </div>
@@ -346,15 +346,15 @@ const DesktopEnvironment = () => {
                             </div>
                             <div className="flex justify-between items-center text-[10px] text-white/80 bg-white/5 p-2 rounded-lg border border-white/5">
                                 <span className="flex items-center gap-2 font-medium">
-                                    <span className="w-3 text-center">🤝</span> Freelance
-                                </span>
-                                <span className="font-bold text-emerald-400">3+ Clients</span>
-                            </div>
-                            <div className="flex justify-between items-center text-[10px] text-white/80 bg-white/5 p-2 rounded-lg border border-white/5">
-                                <span className="flex items-center gap-2 font-medium">
                                     <img src="/icons/premiere-pro.png" className="w-3 h-3 object-contain" /> Premiere
                                 </span>
                                 <span className="font-bold text-emerald-400">20+ Videos</span>
+                            </div>
+                            <div className="flex justify-between items-center text-[10px] text-white/80 bg-white/5 p-2 rounded-lg border border-white/5">
+                                <span className="flex items-center gap-2 font-medium">
+                                    <span className="w-3 text-center">🤝</span> Freelance
+                                </span>
+                                <span className="font-bold text-emerald-400">3+ Clients</span>
                             </div>
                         </div>
                     </div>
