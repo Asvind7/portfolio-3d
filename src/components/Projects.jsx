@@ -37,7 +37,7 @@ const Projects = () => {
                     setSelSub(sub);
                     setSelProject(proj);
                     setLevel(4);
-                    
+
                     // Small delay to ensure DOM is ready before scrolling
                     setTimeout(() => {
                         const el = document.getElementById("projects");
@@ -143,11 +143,11 @@ const Projects = () => {
 
     return (
         <>
-            <section 
-                id="projects" 
-                className={`relative py-6 md:py-16 px-4 md:px-6 transition-all duration-500 ${level === 4 ? "z-[10001]" : "z-10 bg-transparent"}`} 
-                style={{ 
-                    scrollMarginTop: "20px", 
+            <section
+                id="projects"
+                className={`relative py-6 md:py-16 px-4 md:px-6 transition-all duration-500 ${level === 4 ? "z-[10001]" : "z-10 bg-transparent"}`}
+                style={{
+                    scrollMarginTop: "20px",
                     backgroundColor: level === 4 ? "var(--background)" : "transparent",
                 }}
             >
@@ -192,16 +192,16 @@ const Projects = () => {
                                             ))}
                                         </div>
                                     )}
-                                    
+
                                     {level === 2 && selCategory && (
-                                        <CategoryPage 
+                                        <CategoryPage
                                             category={selCategory}
                                             onViewCaseStudy={(proj, sub) => {
                                                 setSelSub(sub);
                                                 setSelProject(proj);
                                                 goTo(4);
                                             }}
-                                            onClose={() => goTo(1)} 
+                                            onClose={() => goTo(1)}
                                         />
                                     )}
                                 </div>
@@ -212,12 +212,12 @@ const Projects = () => {
             </section>
 
             {level === 4 && selProject && selCategory && selSub && (
-                <CaseStudy 
-                    project={selProject} 
-                    categoryLabel={selCategory.label} 
+                <CaseStudy
+                    project={selProject}
+                    categoryLabel={selCategory.label}
                     subcategoryName={selSub.name}
                     isExiting={isExitingCaseStudy}
-                    onBack={handleBackFromCaseStudy} 
+                    onBack={handleBackFromCaseStudy}
                     onBackToHome={handleBackToHomeFromCaseStudy}
                     onNext={handleNextProject}
                     onPrev={handlePrevProject}

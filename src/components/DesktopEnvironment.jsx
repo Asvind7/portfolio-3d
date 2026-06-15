@@ -200,11 +200,11 @@ const DesktopEnvironment = () => {
                             </div>
                             <div>
                                 <h3 className="text-white font-bold text-sm leading-tight">Asvind V.A</h3>
-                                <p className="text-emerald-400 text-[10px] uppercase tracking-wider font-semibold">Motion Designer</p>
+                                <p className="text-emerald-400 text-[10px] uppercase tracking-wider font-semibold">3D Generalist</p>
                             </div>
                         </div>
                         <p className="text-white/80 text-[11px] leading-relaxed mb-3">
-                            Specializing in 3D product animation, motion graphics, and immersive web experiences.
+                            Specializing in 3D animation, motion graphics, video editing and web experiences.
                         </p>
                         <div className="flex gap-2 text-xs">
                             <button onClick={() => toggleWindow("about")} className="flex-1 bg-white/10 hover:bg-white/20 text-white py-1.5 rounded-lg transition-colors font-medium">Resume</button>
@@ -314,11 +314,11 @@ const DesktopEnvironment = () => {
                             </div>
                             <div>
                                 <h3 className="text-white font-bold text-sm leading-tight">Asvind V.A</h3>
-                                <p className="text-emerald-400 text-[10px] uppercase tracking-wider font-semibold">Motion Designer</p>
+                                <p className="text-emerald-400 text-[10px] uppercase tracking-wider font-semibold">3D Generalist</p>
                             </div>
                         </div>
                         <p className="text-white/80 text-[11px] leading-relaxed mb-3">
-                            Specializing in 3D product animation, motion graphics, and immersive web experiences.
+                            Specializing in 3D animation, motion graphics, video editing and web experiences.
                         </p>
                         <div className="flex gap-2 text-xs">
                             <button onClick={() => toggleWindow("about")} className="flex-1 bg-white/10 hover:bg-white/20 text-white py-1.5 rounded-lg font-medium">Resume</button>
