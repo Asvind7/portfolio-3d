@@ -165,16 +165,18 @@ const Projects = () => {
                                 </div>
                             )}
 
-                            <div className={`flex flex-col lg:flex-row items-start ${level === 1 ? "gap-4 lg:gap-8" : "gap-0"}`}>
-                                <div className="flex flex-col items-center justify-center flex-shrink-0 w-full lg:w-[400px] xl:w-[500px] relative z-20 h-[300px] sm:h-[400px] lg:h-full lg:sticky lg:top-32">
-                                    <div className="relative w-full h-full lg:h-[550px]">
-                                        <ProjectCharacter activeCategory={hoveredCategory || selCategory} />
+                            <div className={`flex flex-col lg:flex-row items-start ${level === 1 ? "justify-center" : "gap-0"}`}>
+                                {level !== 1 && (
+                                    <div className="flex flex-col items-center justify-center flex-shrink-0 w-full lg:w-[400px] xl:w-[500px] relative z-20 h-[300px] sm:h-[400px] lg:h-full lg:sticky lg:top-32">
+                                        <div className="relative w-full h-full lg:h-[550px]">
+                                            <ProjectCharacter activeCategory={hoveredCategory || selCategory} />
+                                        </div>
                                     </div>
-                                </div>
+                                )}
 
-                                <div className="flex flex-col gap-6 w-full lg:flex-1">
+                                <div className={`flex flex-col gap-6 w-full ${level === 1 ? "items-center" : "lg:flex-1"}`}>
                                     {level === 1 && (
-                                        <div className="flex flex-col gap-3 w-full">
+                                        <div className="flex flex-row flex-wrap justify-center gap-8 w-full max-w-2xl mt-12">
                                             {Object.values(projectsData).map((cat, i) => (
                                                 <CategoryCard
                                                     key={cat.id}
@@ -194,28 +196,17 @@ const Projects = () => {
                                     {level === 2 && selCategory && (
                                         <CategoryPage 
                                             category={selCategory}
-                                            onSelectSub={(sub) => { setSelSub(sub); goTo(3); }}
-                                            onBack={() => goTo(1)}
-                                            onBackToHome={() => goTo(1)} 
+                                            onViewCaseStudy={(proj, sub) => {
+                                                setSelSub(sub);
+                                                setSelProject(proj);
+                                                goTo(4);
+                                            }}
+                                            onClose={() => goTo(1)} 
                                         />
                                     )}
                                 </div>
                             </div>
                         </div>
-                    )}
-
-                    {level === 3 && selSub && selCategory && (
-                        selSub.isAll ? (
-                            <ProjectsGrid subcategory={selSub} categoryLabel={selCategory.label}
-                                onViewCaseStudy={(proj) => { setSelProject(proj); goTo(4); }}
-                                onBack={() => goTo(1)}
-                                onBackToHome={() => goTo(1)} />
-                        ) : (
-                            <ProjectCarousel subcategory={selSub} categoryLabel={selCategory.label}
-                                onViewCaseStudy={(proj) => { setSelProject(proj); goTo(4); }}
-                                onBack={() => goTo(2)}
-                                onBackToHome={() => goTo(1)} />
-                        )
                     )}
                 </div>
             </section>

@@ -17,18 +17,16 @@
 }
 
 :root {
-  --background: #020617;
-  /* Deepest blue-black */
+  --background: #0f172a; /* Slate 900 base */
   --foreground: #f8fafc;
-  --accent: #10b981;
-  --accent-secondary: #34d399;
-  --accent-glow: rgba(16, 185, 129, 0.15);
-  --nav-bg: rgba(2, 6, 23, 0.8);
+  --accent: #8b5cf6; /* Violet accent for deep cosmic feel */
+  --accent-secondary: #3b82f6; /* Blue secondary */
+  --accent-glow: rgba(139, 92, 246, 0.25);
+  --nav-bg: rgba(15, 23, 42, 0.4);
   --nav-border: rgba(255, 255, 255, 0.1);
-  --card-bg: rgba(15, 23, 42, 0.4);
-  /* Neutered dark slate */
-  --card-border: rgba(255, 255, 255, 0.06);
-  --glass-bg: rgba(255, 255, 255, 0.03);
+  --card-bg: rgba(30, 41, 59, 0.3);
+  --card-border: rgba(255, 255, 255, 0.05);
+  --glass-bg: rgba(15, 23, 42, 0.5);
   --muted-text: #94a3b8;
 }
 
@@ -57,9 +55,25 @@ body {
 /* Utility for glassmorphism */
 .glass {
   background: var(--nav-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid var(--nav-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-dark {
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Make all card backgrounds glassmorphic globally */
+.bg-card-bg {
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
 }
 
 /* Smooth scrolling for anchor links */
